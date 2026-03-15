@@ -1,0 +1,78 @@
+{% extends "layout.html" %}
+{% block title %}Manage Videos{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4 m3-surface">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <div>
+      <h2 class="mb-0">Videos</h2>
+      <div class="text-muted">Manage and feature tournament highlights</div>
+    </div>
+    <div class="d-flex gap-2">
+      <a href="{{ url_for('add_video') }}" class="m3-btn m3-btn-primary">
+        <span class="material-symbols-outlined">add</span>
+        Add Video
+      </a>
+      <a href="{{ url_for('admin') }}" class="m3-btn m3-btn-tonal">
+        <span class="material-symbols-outlined">arrow_back</span>
+        Dashboard
+      </a>
+    </div>
+  </div>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }}" role="alert">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  <div class="table-responsive m3-card">
+    <table class="table m3-table align-middle mb-0">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Category</th>
+          <th>Featured</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for v in videos %}
+        <tr>
+          <td class="fw-semibold">{{ v.title }}</td>
+          <td><span class="m3-chip">{{ v.category }}</span></td>
+          <td>
+            <form method="post" action="{{ url_for('toggle_featured', video_id=v.id) }}">
+              <button class="m3-btn {% if v.featured %}m3-btn-primary{% else %}m3-btn-tonal{% endif %}" type="submit">
+                <span class="material-symbols-outlined">{% if v.featured %}star{% else %}star_rate{% endif %}</span>
+                {% if v.featured %}Featured{% else %}Make Featured{% endif %}
+              </button>
+            </form>
+          </td>
+          <td class="d-flex gap-2">
+            <a class="m3-btn m3-btn-tonal" href="{{ url_for('edit_video', video_id=v.id) }}">
+              <span class="material-symbols-outlined">edit</span>
+              Edit
+            </a>
+            <form method="post" action="{{ url_for('delete_video', video_id=v.id) }}" onsubmit="return confirm('Delete this video?')">
+              <button class="m3-btn" style="background:#ffe5e5;color:#8b0000;" type="submit">
+                <span class="material-symbols-outlined">delete</span>
+                Delete
+              </button>
+            </form>
+          </td>
+        </tr>
+        {% else %}
+        <tr>
+          <td colspan="4" class="text-center py-4">No videos found.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
+
+

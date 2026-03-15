@@ -1,1 +1,443 @@
+{% extends "layout.html" %}
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4 m3-surface">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <div>
+      <h2 class="mb-0">Admin Dashboard</h2>
+      <div class="text-muted"></div>
+    </div>
+    <div class="d-flex gap-2">
+      <a href="{{ url_for('admin_users') }}" class="m3-btn m3-btn-tonal">
+        <span class="material-symbols-outlined">person</span>
+        Users
+      </a>
+      <a href="{{ url_for('admin_videos') }}" class="m3-btn m3-btn-tonal">
+        <span class="material-symbols-outlined">video_library</span>
+        Videos
+      </a>
+      <a href="{{ url_for('admin_logout') }}" class="m3-btn m3-btn-primary">
+        <span class="material-symbols-outlined">logout</span>
+        Logout
+      </a>
+    </div>
+  </div>
+
+  <div class="row g-2 mb-2">
+    <div class="col-12 col-md-6 col-xl-3">
+      <div class="m3-card filter-card" id="filter-total" data-filter="all" style="cursor:pointer;">
+        <div class="m3-card-body">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <div class="text-uppercase" style="font-weight:700;opacity:.7">Total</div>
+              <div class="display-6 fw-bold">{{ stats.total_registrations }}</div>
+            </div>
+            <span class="material-symbols-outlined" style="font-size:40px;color:var(--m3-primary)">group</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 col-xl-3">
+      <div class="m3-card filter-card" id="filter-approved" data-filter="approved" style="cursor:pointer;">
+        <div class="m3-card-body">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <div class="text-uppercase" style="font-weight:700;opacity:.7">Approved</div>
+              <div class="display-6 fw-bold">{{ stats.approved }}</div>
+            </div>
+            <span class="material-symbols-outlined" style="font-size:40px;color:#0f6b06">verified</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 col-xl-3">
+      <div class="m3-card filter-card" id="filter-pending" data-filter="pending" style="cursor:pointer;">
+        <div class="m3-card-body">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <div class="text-uppercase" style="font-weight:700;opacity:.7">Pending</div>
+              <div class="display-6 fw-bold">{{ stats.pending }}</div>
+            </div>
+            <span class="material-symbols-outlined" style="font-size:40px;color:#ff9932">hourglass_top</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 col-xl-3">
+      <div class="m3-card filter-card" id="filter-rejected" data-filter="rejected" style="cursor:pointer;">
+        <div class="m3-card-body">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <div class="text-uppercase" style="font-weight:700;opacity:.7">Rejected</div>
+              <div class="display-6 fw-bold">{{ stats.rejected }}</div>
+            </div>
+            <span class="material-symbols-outlined" style="font-size:40px;color:#b3261e">block</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 col-xl-3">
+      <div class="m3-card filter-card" id="filter-recent" data-filter="recent" style="cursor:pointer;">
+        <div class="m3-card-body">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <div class="text-uppercase" style="font-weight:700;opacity:.7">Recent (7d)</div>
+              <div class="display-6 fw-bold">{{ stats.recent }}</div>
+            </div>
+            <span class="material-symbols-outlined" style="font-size:40px;color:#06c">calendar_month</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="m3-card mb-3">
+    <div class="m3-card-body">
+      <form class="row g-2" method="get" action="{{ url_for('admin') }}">
+        <div class="col-sm-8 col-md-10">
+          <input type="text" class="form-control m3-field" name="search" placeholder="Search team / player / email" value="{{ search_query }}">
+        </div>
+        <div class="col-sm-4 col-md-2">
+          <button class="m3-btn m3-btn-primary w-100" type="submit">
+            <span class="material-symbols-outlined">search</span>
+            Search
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="row g-3" id="registrations-container">
+    {% for reg in registrations %}
+    <div class="col-12 col-lg-6 col-xl-4 registration-card {% if loop.index > 3 %}d-none{% endif %}" data-index="{{ loop.index }}" data-status="{{ reg.team_info.status }}" data-submitted="{{ reg.registration_meta.submitted_at }}">
+      <div class="m3-card">
+        <div class="m3-card-body">
+          <!-- Header with team name and status -->
+          <div class="d-flex justify-content-between align-items-start mb-3">
+            <div class="d-flex align-items-center gap-2">
+              <span class="material-symbols-outlined" style="color:var(--m3-primary)">shield_person</span>
+              <h6 class="mb-0">{{ reg.team_info.name }}</h6>
+            </div>
+            <span class="badge {% if reg.team_info.status == 'approved' %}bg-success{% elif reg.team_info.status == 'rejected' %}bg-danger{% else %}bg-warning{% endif %}">
+              {{ reg.team_info.status|capitalize }}
+            </span>
+          </div>
+
+          <!-- Registration details -->
+          <div class="mb-3">
+            <div class="text-muted small mb-1">ID: {{ reg.registration_id }} • {{ reg.team_info.category }}</div>
+            <div class="text-muted small mb-1">Submitted {{ reg.registration_meta.submitted_at }}</div>
+            <div class="text-muted small">Tournament: {{ reg.team_info.tournament }}</div>
+          </div>
+
+          <!-- Contact info -->
+          <div class="mb-3">
+            <div class="text-muted small mb-1">Email: {{ reg.contact_info.email }}</div>
+            <div class="text-muted small">Phone: {{ reg.contact_info.phone }}</div>
+          </div>
+
+          <!-- Action buttons -->
+          <div class="d-flex gap-2 justify-content-end">
+            <form method="post" action="{{ url_for('update_registration_status', reg_id=reg.registration_id) }}" class="d-inline js-status-form">
+              <select name="status" class="form-select form-select-sm m3-field status-select" data-reg-id="{{ reg.registration_id }}">
+                <option value="pending" {% if reg.team_info.status == 'pending' %}selected{% endif %}>Pending</option>
+                <option value="approved" {% if reg.team_info.status == 'approved' %}selected{% endif %}>Approved</option>
+                <option value="rejected" {% if reg.team_info.status == 'rejected' %}selected{% endif %}>Rejected</option>
+              </select>
+            </form>
+            <button class="m3-btn m3-btn-tonal btn-view-json" type="button" data-reg-id="{{ reg.registration_id }}" data-bs-toggle="modal" data-bs-target="#registrationDetailModal">
+              <span class="material-symbols-outlined">visibility</span>
+              View
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% else %}
+    <div class="col-12">
+      <div class="m3-card"><div class="m3-card-body text-center py-4">No registrations found.</div></div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <!-- Show More Button -->
+  {% if registrations|length > 3 %}
+  <div class="text-center mt-4">
+    <button class="m3-btn m3-btn-primary" id="show-more-btn" onclick="toggleShowMore()">
+      <span class="material-symbols-outlined">expand_more</span>
+      Show More ({{ registrations|length - 3 }} more)
+    </button>
+  </div>
+  {% endif %}
+</div>
+
+<!-- Registration Detail Modal -->
+<div class="modal fade" id="registrationDetailModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Registration Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div id="reg-detail-body">
+          <div class="text-muted">Loading...</div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+  </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const modalEl = document.getElementById('registrationDetailModal');
+    const bodyEl = document.getElementById('reg-detail-body');
+    const filterCards = document.querySelectorAll('.filter-card');
+    const cardsContainer = document.getElementById('registrations-container');
+    const showMoreBtn = document.getElementById('show-more-btn');
+    const searchForm = document.querySelector("form[action='{{ url_for('admin') }}']");
+    const searchInput = searchForm ? searchForm.querySelector('input[name="search"]') : null;
+    const statusSelects = document.querySelectorAll('.status-select');
+
+    const filterState = { status: 'all', search: '' };
+
+    function isRecent(dateStr) {
+      if (!dateStr) return false;
+      const d = new Date(dateStr);
+      if (isNaN(d.getTime())) return false;
+      const now = new Date();
+      const diff = (now - d) / (1000 * 60 * 60 * 24);
+      return diff <= 7;
+    }
+
+    function setActiveFilterCard(id) {
+      filterCards.forEach(c => c.classList.remove('active'));
+      const el = document.getElementById(id);
+      if (el) el.classList.add('active');
+    }
+
+    function applyFilters() {
+      const cards = cardsContainer.querySelectorAll('.registration-card');
+      const hasSearch = filterState.search && filterState.search.trim().length > 0;
+      const hasStatus = filterState.status && filterState.status !== 'all';
+
+      let visibleCount = 0;
+      cards.forEach(card => {
+        const status = (card.getAttribute('data-status') || '').toLowerCase();
+        const submitted = card.getAttribute('data-submitted');
+        const text = card.textContent.toLowerCase();
+        const matchesStatus = !hasStatus || (
+          (filterState.status === 'recent' && isRecent(submitted)) ||
+          (filterState.status !== 'recent' && status === filterState.status)
+        );
+        const matchesSearch = !hasSearch || text.includes(filterState.search.toLowerCase());
+        const show = matchesStatus && matchesSearch;
+        if (show) {
+          card.classList.remove('d-none');
+          visibleCount++;
+        } else {
+          card.classList.add('d-none');
+        }
+      });
+
+      // Show all when filtering; hide Show More button
+      if (showMoreBtn) {
+        if (hasSearch || hasStatus) {
+          showMoreBtn.style.display = 'none';
+        } else {
+          showMoreBtn.style.display = '';
+          // Restore default: hide beyond first 3
+          const allCards = cardsContainer.querySelectorAll('.registration-card');
+          allCards.forEach((card, index) => {
+            if (index >= 3) card.classList.add('d-none');
+          });
+        }
+      }
+    }
+
+    function updateStatusBadge(cardEl, newStatus) {
+      const badge = cardEl.querySelector('.badge');
+      if (!badge) return;
+      badge.classList.remove('bg-success','bg-danger','bg-warning');
+      if (newStatus === 'approved') badge.classList.add('bg-success');
+      else if (newStatus === 'rejected') badge.classList.add('bg-danger');
+      else badge.classList.add('bg-warning');
+      badge.textContent = newStatus.charAt(0).toUpperCase() + newStatus.slice(1);
+    }
+
+    function recalcAndRenderStats() {
+      const cards = cardsContainer.querySelectorAll('.registration-card');
+      let total = 0, approved = 0, pending = 0, rejected = 0, recent = 0;
+      const now = new Date();
+      cards.forEach(card => {
+        if (card.classList.contains('d-none')) return; // still count total regardless? keep counting all
+        total++;
+      });
+      // Count across all (not just visible)
+      const allCards = cardsContainer.querySelectorAll('.registration-card');
+      allCards.forEach(card => {
+        const st = (card.getAttribute('data-status')||'').toLowerCase();
+        if (st === 'approved') approved++;
+        if (st === 'pending') pending++;
+        if (st === 'rejected') rejected++;
+        const submitted = card.getAttribute('data-submitted');
+        if (isRecent(submitted)) recent++;
+      });
+      const setNum = (selector, val) => {
+        const el = document.querySelector(selector);
+        if (el) el.textContent = val;
+      };
+      setNum('#filter-total .display-6', allCards.length);
+      setNum('#filter-approved .display-6', approved);
+      setNum('#filter-pending .display-6', pending);
+      setNum('#filter-rejected .display-6', rejected);
+      setNum('#filter-recent .display-6', recent);
+    }
+
+    // Inline AJAX status update (no redirect)
+    statusSelects.forEach(sel => {
+      sel.addEventListener('change', function(e) {
+        const selectEl = e.currentTarget;
+        const regId = selectEl.getAttribute('data-reg-id');
+        const newStatus = selectEl.value;
+        const form = selectEl.closest('form');
+        const actionUrl = form ? form.getAttribute('action') : `{{ url_for('update_registration_status', reg_id='__RID__') }}`.replace('__RID__', regId);
+        const cardEl = selectEl.closest('.registration-card');
+        const prev = selectEl.getAttribute('data-prev') || selectEl.value;
+
+        fetch(actionUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: `status=${encodeURIComponent(newStatus)}`
+        })
+        .then(r => r.json())
+        .then(data => {
+          if (data && data.success) {
+            if (cardEl) {
+              cardEl.setAttribute('data-status', newStatus);
+              updateStatusBadge(cardEl, newStatus);
+            }
+            selectEl.setAttribute('data-prev', newStatus);
+            recalcAndRenderStats();
+          } else {
+            selectEl.value = prev;
+          }
+        })
+        .catch(() => {
+          selectEl.value = prev;
+        });
+      });
+    });
+
+    // Click handlers for metric cards
+    filterCards.forEach(card => {
+      card.addEventListener('click', function() {
+        const f = this.getAttribute('data-filter');
+        filterState.status = f || 'all';
+        setActiveFilterCard(this.id);
+        applyFilters();
+      });
+    });
+
+    // Intercept search submit and add live filtering
+    if (searchForm && searchInput) {
+      searchForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        filterState.search = searchInput.value || '';
+        applyFilters();
+      });
+      searchInput.addEventListener('input', function() {
+        filterState.search = this.value || '';
+        applyFilters();
+      });
+    }
+
+    function renderHumanReadable(reg) {
+      const players = (reg.players || []).map(p => `- ${p.name} (${p.role || 'Player'})`).join('\n');
+
+      const meta = reg.registration_meta || {};
+      const metaLines = [
+        `Submitted: ${meta.submitted_at || ''}`,
+        `IP Address: ${meta.ip_address || ''}`,
+        `Browser: ${meta.browser || ''}`,
+        `Device: ${meta.device || ''}`
+      ].join('\n');
+
+      const text = `Team: ${reg.team_info?.name || ''}\n` +
+                   `Status: ${reg.team_info?.status || ''}\n` +
+                   `Tournament: ${reg.team_info?.tournament || ''}\n` +
+                   `Registration ID: ${reg.registration_id}\n` +
+                   `\nPlayers:\n${players}\n` +
+                   `\nContact:\n- Email: ${reg.contact_info?.email || ''}\n- Phone: ${reg.contact_info?.phone || ''}` +
+                   `\n\nMeta:\n${metaLines}`;
+      return `<pre style="white-space: pre-wrap; margin:0;">${text}</pre>`;
+    }
+
+    modalEl.addEventListener('show.bs.modal', function (event) {
+      const button = event.relatedTarget;
+      const regId = button?.getAttribute('data-reg-id');
+      bodyEl.innerHTML = '<div class="text-muted">Loading...</div>';
+      if (!regId) return;
+      fetch(`{{ url_for('get_registration_detail', reg_id='__RID__') }}`.replace('__RID__', regId))
+        .then(r => r.json())
+        .then(data => {
+          if (data.success) {
+            bodyEl.innerHTML = renderHumanReadable(data.registration);
+          } else {
+            bodyEl.innerHTML = `<div class="text-danger">${data.message || 'Failed to load details.'}</div>`;
+          }
+        })
+        .catch(() => {
+          bodyEl.innerHTML = '<div class="text-danger">Error loading details.</div>';
+        });
+    });
+  });
+
+  // Show More functionality
+  function toggleShowMore() {
+    const hiddenCards = document.querySelectorAll('.registration-card.d-none');
+    const showMoreBtn = document.getElementById('show-more-btn');
+    
+    if (hiddenCards.length > 0) {
+      // Show all hidden cards
+      hiddenCards.forEach(card => {
+        card.classList.remove('d-none');
+        card.style.animation = 'fadeInUp 0.5s ease-out';
+      });
+      
+      // Update button text
+      showMoreBtn.innerHTML = `
+        <span class="material-symbols-outlined">expand_less</span>
+        Show Less
+      `;
+      showMoreBtn.onclick = toggleShowLess;
+    }
+  }
+
+  function toggleShowLess() {
+    const allCards = document.querySelectorAll('.registration-card');
+    const showMoreBtn = document.getElementById('show-more-btn');
+    
+    // Hide cards beyond the first 3
+    allCards.forEach((card, index) => {
+      if (index >= 3) {
+        card.classList.add('d-none');
+      }
+    });
+    
+    // Update button text
+    const totalCards = document.querySelectorAll('.registration-card').length;
+    showMoreBtn.innerHTML = `
+      <span class="material-symbols-outlined">expand_more</span>
+      Show More (${totalCards - 3} more)
+    `;
+    showMoreBtn.onclick = toggleShowMore;
+  }
+</script>
+
+{% endblock %}
 

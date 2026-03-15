@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+{% block title %}Admin Users{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4 m3-surface">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <div>
+      <h2 class="mb-0">Users</h2>
+      <div class="text-muted">Manage user wallets</div>
+    </div>
+    <div class="d-flex gap-2">
+      <a href="{{ url_for('admin') }}" class="m3-btn m3-btn-tonal">
+        <span class="material-symbols-outlined">dashboard</span>
+        Dashboard
+      </a>
+      <a href="{{ url_for('admin_logout') }}" class="m3-btn m3-btn-primary">
+        <span class="material-symbols-outlined">logout</span>
+        Logout
+      </a>
+    </div>
+  </div>
+
+  <div class="m3-card">
+    <div class="m3-card-body">
+      <div class="table-responsive">
+        <table class="table align-middle">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Status</th>
+              <th>Balance</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for u in users %}
+            <tr>
+              <td>{{ loop.index }}</td>
+              <td>{{ u.name }}</td>
+              <td>{{ u.email }}</td>
+              <td><span class="badge {% if u.status=='active' %}bg-success{% else %}bg-secondary{% endif %}">{{ u.status|capitalize }}</span></td>
+              <td>{{ u.wallet.balance }} {{ u.wallet.currency }}</td>
+              <td>
+                <form class="d-flex gap-2" method="post" action="{{ url_for('admin_update_user_wallet', user_id=u.id) }}">
+                  <input type="number" name="amount" class="form-control form-control-sm m3-field" placeholder="Amount" required>
+                  <button name="action" value="delta" class="m3-btn m3-btn-tonal btn-sm" type="submit">Add/Subtract</button>
+                  <button name="action" value="set" class="m3-btn m3-btn-primary btn-sm" type="submit">Set</button>
+                </form>
+              </td>
+            </tr>
+            {% else %}
+            <tr>
+              <td colspan="6" class="text-center text-muted">No users yet.</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+
+

@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+{% block title %}Edit Video{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4 m3-surface">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <div>
+      <h2 class="mb-0">Edit Video</h2>
+      <div class="text-muted">Update details and save</div>
+    </div>
+    <a href="{{ url_for('admin_videos') }}" class="m3-btn m3-btn-tonal">
+      <span class="material-symbols-outlined">arrow_back</span>
+      Back
+    </a>
+  </div>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }}" role="alert">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  <form method="post" class="m3-card">
+    <div class="m-3">
+      <label class="form-label" for="title">Title</label>
+      <input class="form-control" id="title" name="title" value="{{ video.title }}" required>
+    </div>
+    <div class="m-3">
+      <label class="form-label" for="description">Description</label>
+      <textarea class="form-control" id="description" name="description" rows="3">{{ video.description }}</textarea>
+    </div>
+    <div class="m-3">
+      <label class="form-label" for="youtube_url">YouTube URL</label>
+      <input class="form-control" id="youtube_url" name="youtube_url" value="{{ video.youtube_url }}" required>
+    </div>
+    <div class="m-3">
+      <label class="form-label" for="category">Category</label>
+      <input class="form-control" id="category" name="category" value="{{ video.category }}">
+    </div>
+    <div class="form-check m-3">
+      <input class="form-check-input" type="checkbox" id="featured" name="featured" {% if video.featured %}checked{% endif %}>
+      <label class="form-check-label" for="featured">Featured</label>
+    </div>
+    <div class="m-3">
+      <button class="m3-btn m3-btn-primary" type="submit">
+        <span class="material-symbols-outlined">save</span>
+        Update
+      </button>
+    </div>
+  </form>
+</div>
+{% endblock %}
+
+

@@ -1,0 +1,120 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="row">
+  <div class="col-lg-8 mx-auto">
+    <div class="text-center mb-5">
+      <h2><i class="fas fa-users me-3"></i>Team Registration</h2>
+      <p class="lead">Register your team for the BGMI Esports Championship 2025</p>
+    </div>
+    
+    <form method="POST" onsubmit="return validateRegistrationForm()" class="position-relative">
+      <!-- Team Information Section -->
+      <div class="card mb-4">
+        <div class="card-header">
+          <i class="fas fa-flag me-2"></i>Team Information
+        </div>
+        <div class="card-body">
+          <div class="mb-3">
+            <label for="team_name" class="form-label">Team Name</label>
+            <input type="text" class="form-control" id="team_name" name="team_name" 
+                   placeholder="Enter your team name" required>
+            <div class="form-text">Choose a unique and memorable team name</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Players Section -->
+      <div class="card mb-4">
+        <div class="card-header">
+          <i class="fas fa-gamepad me-2"></i>Team Players (4 members)
+        </div>
+        <div class="card-body">
+          <div class="row">
+            {% for i in range(1,5) %}
+            <div class="col-md-6 mb-3">
+              <label for="player{{i}}" class="form-label">
+                <i class="fas fa-user me-2"></i>Player {{i}} Name
+                {% if i == 1 %}
+                <span class="badge bgmi-accent-bg ms-2">Team Leader</span>
+                {% endif %}
+              </label>
+              <input type="text" class="form-control" id="player{{i}}" name="player{{i}}" 
+                     placeholder="Player {{i}} name" required>
+            </div>
+            {% endfor %}
+          </div>
+          <div class="alert alert-info">
+            <i class="fas fa-info-circle me-2"></i>
+            <strong>Note:</strong> All  players must be registered. Player 1 will be the team leader and primary contact.
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact Information Section -->
+      <div class="card mb-4">
+        <div class="card-header">
+          <i class="fas fa-address-book me-2"></i>Contact Information
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="email" class="form-label">
+                <i class="fas fa-envelope me-2"></i>Contact Email
+              </label>
+              <input type="email" class="form-control" id="email" name="email" 
+                     placeholder="your.email@example.com" required>
+              <div class="form-text">We'll send tournament updates to this email</div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="phone" class="form-label">
+                <i class="fas fa-phone me-2"></i>Phone Number
+              </label>
+              <input type="tel" class="form-control" id="phone" name="phone" 
+                     placeholder="10-digit mobile number" required pattern="[0-9]{10}">
+              <div class="form-text">For urgent tournament communications</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tournament Rules Section -->
+      <div class="card mb-4">
+        <div class="card-header">
+          <i class="fas fa-gavel me-2"></i>Tournament Rules & Guidelines
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-6">
+              <h6><i class="fas fa-check-circle bgmi-green-accent me-2"></i>Eligibility</h6>
+              <ul class="list-unstyled">
+                <li><i class="fas fa-arrow-right bgmi-accent me-2"></i>Age: 16+ years</li>
+                <li><i class="fas fa-arrow-right bgmi-accent me-2"></i>Valid BGMI account</li>
+                <li><i class="fas fa-arrow-right bgmi-accent me-2"></i>Stable internet connection</li>
+              </ul>
+            </div>
+            <div class="col-md-6">
+              <h6><i class="fas fa-exclamation-triangle bgmi-accent me-2"></i>Important</h6>
+              <ul class="list-unstyled">
+                <li><i class="fas fa-arrow-right bgmi-accent me-2"></i>No team changes after registration</li>
+                <li><i class="fas fa-arrow-right bgmi-accent me-2"></i>Fair play policy applies</li>
+                <li><i class="fas fa-arrow-right bgmi-accent me-2"></i>Tournament schedule will be shared via email</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="text-center">
+        <button type="submit" class="btn btn-success btn-lg">
+          <i class="fas fa-paper-plane me-2"></i>Submit Registration
+        </button>
+        <p class="text-muted mt-3">
+          <i class="fas fa-shield-alt me-2"></i>
+          Your information is secure and will only be used for tournament purposes
+        </p>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,131 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="hero-section">
+  <div class="row align-items-center">
+    <div class="col-lg-8 mx-auto text-center">
+      <h1 class="text-dark fw-bold mb-4">
+        <span class="text-warning">Video</span> 
+        <span class="text-success">Player</span> 
+        <span class="text-dark">Test</span>
+      </h1>
+      <p class="lead text-dark fw-semibold mb-4">Testing the enhanced video player functionality.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Test Video Player -->
+<div class="row mt-5">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header bgmi-accent-bg">
+        <i class="fas fa-play-circle me-2"></i>Test Video Player
+      </div>
+      <div class="card-body">
+        <div id="test-video-container">
+          <!-- Test video player will be loaded here -->
+          <div class="text-center py-5">
+            <i class="fas fa-play-circle fa-3x text-muted mb-3"></i>
+            <h5 class="text-muted">Click the button below to test the video player</h5>
+            <button class="btn btn-primary" onclick="testVideoPlayer()">
+              <i class="fas fa-play me-2"></i>Test Video Player
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Debug Information -->
+<div class="row mt-5">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header bgmi-green-bg">
+        <i class="fas fa-bug me-2"></i>Debug Information
+      </div>
+      <div class="card-body">
+        <div id="debug-info">
+          <p><strong>Status:</strong> <span id="status">Ready</span></p>
+          <p><strong>Console Logs:</strong></p>
+          <div id="console-logs" style="background: #f8f9fa; padding: 10px; border-radius: 5px; max-height: 200px; overflow-y: auto; font-family: monospace; font-size: 12px;">
+            <!-- Console logs will appear here -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Test video data
+const testVideoData = {
+  id: "test",
+  title: "Test Video",
+  description: "This is a test video to verify the player functionality",
+  embed_id: "dQw4w9WgXcQ", // Rick Roll for testing
+  views: 1000,
+  duration: "3:33",
+  created_at: "2025-01-01T00:00:00Z",
+  thumbnail: "https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
+  category: "test"
+};
+
+// Override console.log to capture logs
+const originalConsoleLog = console.log;
+const originalConsoleError = console.error;
+
+function captureLog(type, ...args) {
+  const logsContainer = document.getElementById('console-logs');
+  if (logsContainer) {
+    const logEntry = document.createElement('div');
+    logEntry.style.color = type === 'error' ? 'red' : 'black';
+    logEntry.textContent = `[${new Date().toLocaleTimeString()}] ${type.toUpperCase()}: ${args.join(' ')}`;
+    logsContainer.appendChild(logEntry);
+    logsContainer.scrollTop = logsContainer.scrollHeight;
+  }
+  
+  if (type === 'log') {
+    originalConsoleLog.apply(console, args);
+  } else {
+    originalConsoleError.apply(console, args);
+  }
+}
+
+console.log = (...args) => captureLog('log', ...args);
+console.error = (...args) => captureLog('error', ...args);
+
+function testVideoPlayer() {
+  console.log('Testing video player...');
+  
+  try {
+    // Update status
+    document.getElementById('status').textContent = 'Testing...';
+    
+    // Create test video player
+    const testPlayer = new EnhancedVideoPlayer('test-video-container', testVideoData);
+    
+    // Load the video
+    testPlayer.loadVideo();
+    
+    // Update status after a delay
+    setTimeout(() => {
+      document.getElementById('status').textContent = 'Test completed successfully!';
+    }, 3000);
+    
+    console.log('Test video player created successfully');
+  } catch (error) {
+    console.error('Error testing video player:', error);
+    document.getElementById('status').textContent = 'Test failed: ' + error.message;
+  }
+}
+
+// Auto-test on page load
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('Test page loaded');
+  console.log('EnhancedVideoPlayer class available:', typeof EnhancedVideoPlayer !== 'undefined');
+  console.log('Test video data:', testVideoData);
+});
+</script>
+
+{% endblock %} 

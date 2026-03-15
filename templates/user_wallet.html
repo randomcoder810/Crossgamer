@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block title %}My Wallet{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center py-4">
+  <div class="col-lg-8">
+    <div class="m3-card mb-3">
+      <div class="m3-card-body d-flex justify-content-between align-items-center">
+        <div>
+          <h4 class="mb-1">Hello, {{ user.name if user else session.get('user_name') }}</h4>
+          <div class="text-muted">Email: {{ user.email if user else session.get('user_email') }}</div>
+        </div>
+        <div>
+          <a class="m3-btn m3-btn-tonal" href="{{ url_for('user_logout') }}">Logout</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="m3-card">
+      <div class="m3-card-body">
+        <h5 class="mb-3">Wallet</h5>
+        {% if user and user.wallet %}
+          <div class="display-6 fw-bold">₹ {{ user.wallet.balance }}</div>
+          <div class="text-muted">Updated {{ user.wallet.updated_at }}</div>
+        {% else %}
+          <div class="text-muted">No wallet found.</div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+
+

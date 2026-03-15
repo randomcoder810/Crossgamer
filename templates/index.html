@@ -1,0 +1,216 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="hero-section">
+  <div class="row align-items-center">
+    <div class="col-lg-6">
+      <h1 class="text-dark fw-bold mb-4">
+        <span class="text-warning">BGMI</span> 
+        <span class="text-success">ESPORTS</span> 
+        <span class="text-dark">CHAMPIONSHIP</span>
+      </h1>
+      <p class="lead text-dark fw-semibold mb-4">Join the ultimate battle royale tournament! Compete with the best players, win amazing prizes, and become the champion.</p>
+      <div class="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start" style="margin-left: 5px;">
+        <a href="{{ url_for('register') }}" class="btn btn-warning btn-lg fw-bold text-dark">
+          <i class="fas fa-gamepad me-2"></i>Register Now
+        </a>
+        <a href="{{ url_for('contact') }}" class="btn btn-outline-success btn-lg fw-bold">
+          <i class="fas fa-envelope me-2"></i>Contact Us
+        </a>
+      </div>
+    </div>
+    <div class="col-lg-6 text-center">
+      <div class="row g-3" style="margin-right: 0px;">
+        <div class="col-md-6">
+          <div class="stats-card">
+            <div class="stats-number text-dark">2025</div>
+            <div class="stats-label text-dark">Tournament Year</div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="stats-card">
+            <div class="stats-number text-dark">₹50,000</div>
+            <div class="stats-label text-dark">Prize Pool</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="row mt-5">
+  <div class="col-md-4 mb-4">
+    <div class="card h-100">
+      <div class="card-header bgmi-green-bg">
+        <i class="fas fa-trophy me-2"></i>Tournament Info
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">BGMI Championship 2025</h5>
+        <p class="card-text">Experience the most competitive BGMI tournament with professional players from across the region.</p>
+        <ul class="list-unstyled">
+          <li><i class="fas fa-calendar bgmi-accent me-2"></i>Registration Open</li>
+          <li><i class="fas fa-users bgmi-green-accent me-2"></i>4 Players per Team</li>
+          <li><i class="fas fa-map-marker-alt bgmi-accent me-2"></i>Online Tournament</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-md-4 mb-4">
+    <div class="card h-100">
+      <div class="card-header bgmi-accent-bg">
+        <i class="fas fa-medal me-2"></i>Prizes
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Amazing Rewards</h5>
+        <p class="card-text">Compete for incredible prizes and recognition in the gaming community.</p>
+        <div class="text-center">
+          <div class="stats-number bgmi-accent">1st Place</div>
+          <div class="stats-label">₹25,000</div>
+          <div class="stats-number bgmi-green-accent">2nd Place</div>
+          <div class="stats-label">₹15,000</div>
+          <div class="stats-number text-secondary">3rd Place</div>
+          <div class="stats-label">₹10,000</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-md-4 mb-4">
+    <div class="card h-100">
+      <div class="card-header bgmi-green-bg">
+        <i class="fas fa-clock me-2"></i>Schedule
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Tournament Timeline</h5>
+        <p class="card-text">Mark your calendars for the most exciting gaming event of the year.</p>
+        <div class="timeline">
+          <div class="d-flex align-items-center mb-3">
+            <div class="badge bgmi-accent-bg me-3">Phase 1</div>
+            <div>Registration & Qualifiers</div>
+          </div>
+          <div class="d-flex align-items-center mb-3">
+            <div class="badge bgmi-green-bg me-3">Phase 2</div>
+            <div>Quarter Finals</div>
+          </div>
+          <div class="d-flex align-items-center mb-3">
+            <div class="badge bgmi-accent-bg me-3">Phase 3</div>
+            <div>Semi Finals</div>
+          </div>
+          <div class="d-flex align-items-center">
+            <div class="badge bgmi-green-bg me-3">Final</div>
+            <div>Championship Match</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Enhanced Tournament Highlights Slideshow Section -->
+{% if all_videos %}
+<div class="highlights-section">
+  <div class="highlights-header">
+    <h2 class="highlights-title">Latest Tournament Highlights</h2>
+    <p class="highlights-subtitle">Experience the most epic BGMI moments and professional gameplay</p>
+  </div>
+  
+  <div class="highlights-slideshow">
+    {% for video in all_videos %}
+    <div class="highlights-slide {% if loop.first %}active{% endif %}"
+         data-video-id="{{ video.id }}"
+         data-embed-id="{{ video.embed_id }}"
+         data-title="{{ video.title }}"
+         data-duration="{{ video.duration }}"
+         data-thumbnail="{{ video.thumbnail }}"
+         data-description="{{ video.description|e }}"
+         data-views="{{ video.views }}"
+         data-created-at="{{ video.created_at }}">
+      
+      <!-- Video Container with inline player -->
+      <div class="highlight-video-container" style="width: 100%; margin: 0 auto;">
+        <img src="{{ video.thumbnail }}" 
+             alt="{{ video.title }}" 
+             class="highlight-video-thumbnail"
+             style="width: 100%; height: auto; display: block;">
+        
+        <!-- Inline Video Player (hidden by default) -->
+        <div class="highlight-video-player" style="display: none; width: 100%; height: 400px;"></div>
+        
+        <!-- Enhanced Play Button -->
+        <div class="highlight-play-button">
+          <i class="fas fa-play"></i>
+        </div>
+        
+        <!-- Category Badge -->
+        <div class="highlight-badge">{{ video.category|title }}</div>
+      </div>
+      
+      <!-- Video Info -->
+      <div class="highlight-video-info">
+        <h3 class="highlight-video-title">{{ video.title }}</h3>
+        <p class="highlight-video-description">{{ video.description | truncate(120, True) }}</p>
+        
+        <!-- Video Meta -->
+        <div class="highlight-video-meta">
+          <div class="highlight-meta-item">
+            <i class="fas fa-eye"></i>
+            <span>{{ video.views }} views</span>
+          </div>
+          <div class="highlight-meta-item">
+            <i class="fas fa-clock"></i>
+            <span>{{ video.duration }}</span>
+          </div>
+          {% if video.featured %}
+          <div class="highlight-meta-item">
+            <i class="fas fa-star"></i>
+            <span>Featured</span>
+          </div>
+          {% endif %}
+        </div>
+        
+        <!-- Action Buttons: inline playback only -->
+        <div class="highlight-actions">
+          <button class="highlight-btn highlight-btn-primary highlight-watch-btn">
+            <i class="fas fa-play me-2"></i>Watch Now
+          </button>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+    
+    <!-- Navigation -->
+    <div class="highlights-navigation">
+      <button class="highlights-nav-btn" data-action="prev" title="Previous">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      
+      <div class="highlights-dots">
+        {% for video in all_videos %}
+        <button class="highlight-dot {% if loop.first %}active{% endif %}" 
+                data-slide="{{ loop.index0 }}"></button>
+        {% endfor %}
+      </div>
+      
+      <button class="highlights-nav-btn" data-action="next" title="Next">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+{% endif %}
+
+<div class="row mt-5">
+  <div class="col-12 text-center">
+    <h2 class="text-dark fw-bold mb-3">
+      <span class="text-warning">Ready</span> to 
+      <span class="text-success">Dominate</span>?
+    </h2>
+    <p class="lead text-dark fw-semibold mb-4">Join thousands of players competing for glory and prizes!</p>
+    <a href="{{ url_for('register') }}" class="btn btn-warning btn-lg fw-bold text-dark">
+      <i class="fas fa-rocket me-2"></i>Start Your Journey
+    </a>
+  </div>
+</div>
+{% endblock %}

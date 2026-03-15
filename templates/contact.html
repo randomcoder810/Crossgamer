@@ -1,0 +1,194 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="row">
+  <div class="col-12">
+    <div class="text-center mb-5">
+      <h2><i class="fas fa-envelope me-3"></i>Contact Us</h2>
+      <p class="lead">Have questions about the tournament? We're here to help!</p>
+    </div>
+    
+    <div class="row g-4 align-items-stretch justify-content-center">
+      <!-- Contact Form -->
+      <div class="col-lg-8 col-md-7">
+        <form method="POST" onsubmit="return validateContactForm()" class="position-relative">
+          <div class="card">
+            <div class="card-header">
+              <i class="fas fa-paper-plane me-2"></i>Send us a Message
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="name" class="form-label">
+                    <i class="fas fa-user me-2"></i>Your Name
+                  </label>
+                  <input type="text" class="form-control" id="name" name="name" 
+                         placeholder="Enter your full name" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="email" class="form-label">
+                    <i class="fas fa-envelope me-2"></i>Your Email
+                  </label>
+                  <input type="email" class="form-control" id="email" name="email" 
+                         placeholder="your.email@example.com" required>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="message" class="form-label">
+                  <i class="fas fa-comment me-2"></i>Message
+                </label>
+                <textarea class="form-control" id="message" name="message" rows="6" 
+                          placeholder="Tell us about your question or concern..." required></textarea>
+                <div class="form-text">Please provide as much detail as possible so we can help you better.</div>
+              </div>
+              <div class="text-center">
+                <button type="submit" class="btn btn-primary btn-lg">
+                  <i class="fas fa-send me-2"></i>Send Message
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      
+      <!-- Contact Information -->
+      <div class="col-lg-4 col-md-5">
+        <div class="card h-100">
+          <div class="card-header">
+            <i class="fas fa-info-circle me-2"></i>Contact Information
+          </div>
+          <div class="card-body">
+            <div class="mb-4">
+              <h6><i class="fas fa-envelope bgmi-accent me-2"></i>Email Support</h6>
+              <p class="mb-2">tournament@bgmiesports.com</p>
+              <small class="text-muted">Response within 24 hours</small>
+            </div>
+            
+            <div class="mb-4">
+              <h6><i class="fas fa-phone bgmi-green-accent me-2"></i>Phone Support</h6>
+              <p class="mb-2">+91 98765 43210</p>
+              <small class="text-muted">Mon-Fri, 9 AM - 6 PM IST</small>
+            </div>
+            
+            <div class="mb-4">
+              <h6><i class="fas fa-clock bgmi-accent me-2"></i>Response Time</h6>
+              <p class="mb-2">Within 24 hours</p>
+              <small class="text-muted">For urgent matters, call us directly</small>
+            </div>
+            
+            <div class="mb-4">
+              <h6><i class="fab fa-discord bgmi-accent me-2"></i>Discord Community</h6>
+              <p class="mb-2">
+                <a href="https://discord.gg/dbk9YnhSJf" target="_blank" class="text-decoration-none">
+                  <i class="fas fa-external-link-alt me-1"></i>Join our Discord Server
+                </a>
+              </p>
+              <small class="text-muted">Connect with players, get updates, and join discussions</small>
+            </div>
+            
+            <div class="mb-4">
+              <h6><i class="fab fa-whatsapp bgmi-green-accent me-2"></i>WhatsApp Community</h6>
+              <p class="mb-2">
+                <a href="https://chat.whatsapp.com/DbVyzeUWNUu9H00PGopUsO" target="_blank" class="text-decoration-none">
+                  <i class="fas fa-external-link-alt me-1"></i>Join our WhatsApp Group
+                </a>
+              </p>
+              <small class="text-muted">Quick updates, team coordination, and instant support</small>
+            </div>
+            
+            <div class="mb-4">
+              <h6><i class="fab fa-youtube bgmi-accent me-2"></i>YouTube Channel</h6>
+              <p class="mb-2">
+                <a href="https://www.youtube.com/@crossgamer70" target="_blank" class="text-decoration-none">
+                  <i class="fas fa-external-link-alt me-1"></i>Watch Tournament Highlights
+                </a>
+              </p>
+              <small class="text-muted">Latest gameplay, highlights, and tournament coverage</small>
+            </div>
+            
+            <div class="alert alert-info">
+              <i class="fas fa-lightbulb me-2"></i>
+              <strong>Pro Tip:</strong> Check our FAQ section for quick answers to common questions.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Quick Links Section -->
+    <div class="row mt-5">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <i class="fas fa-link me-2"></i>Quick Links
+          </div>
+          <div class="card-body">
+            <div class="row g-3">
+              <div class="col-md-2 col-sm-4 col-6">
+                <a href="{{ url_for('register') }}" class="btn btn-outline-secondary w-100">
+                  <i class="fas fa-users me-1"></i>Register
+                </a>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <a href="https://discord.gg/dbk9YnhSJf" target="_blank" class="btn btn-outline-secondary w-100">
+                  <i class="fab fa-discord me-1"></i>Discord
+                </a>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <a href="https://chat.whatsapp.com/DbVyzeUWNUu9H00PGopUsO" target="_blank" class="btn btn-outline-secondary w-100">
+                  <i class="fab fa-whatsapp me-1"></i>WhatsApp
+                </a>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <a href="https://www.youtube.com/@crossgamer70" target="_blank" class="btn btn-outline-secondary w-100">
+                  <i class="fab fa-youtube me-1"></i>YouTube
+                </a>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <a href="#" class="btn btn-outline-secondary w-100">
+                  <i class="fas fa-question-circle me-1"></i>FAQ
+                </a>
+              </div>
+              <div class="col-md-2 col-sm-4 col-6">
+                <a href="#" class="btn btn-outline-secondary w-100">
+                  <i class="fas fa-book me-1"></i>Rules
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- FAQ Section -->
+    <div class="row mt-5">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <i class="fas fa-question-circle me-2"></i>Frequently Asked Questions
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6">
+                <h6><i class="fas fa-gamepad bgmi-accent me-2"></i>Tournament Related</h6>
+                <ul class="list-unstyled">
+                  <li class="mb-2"><i class="fas fa-arrow-right bgmi-green-accent me-2"></i>When does the tournament start?</li>
+                  <li class="mb-2"><i class="fas fa-arrow-right bgmi-green-accent me-2"></i>What are the prize amounts?</li>
+                  <li class="mb-2"><i class="fas fa-arrow-right bgmi-green-accent me-2"></i>Can I change my team members?</li>
+                </ul>
+              </div>
+              <div class="col-md-6">
+                <h6><i class="fas fa-cog bgmi-accent me-2"></i>Technical Support</h6>
+                <ul class="list-unstyled">
+                  <li class="mb-2"><i class="fas fa-arrow-right bgmi-accent me-2"></i>System requirements</li>
+                  <li class="mb-2"><i class="fas fa-arrow-right bgmi-accent me-2"></i>Connection issues</li>
+                  <li class="mb-2"><i class="fas fa-arrow-right bgmi-accent me-2"></i>Account verification</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

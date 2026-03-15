@@ -1,19 +1,22 @@
 {% extends "layout.html" %}
-{% block title %}400 - Bad Request{% endblock %}
+{% block title %}404 - Page Not Found{% endblock %}
 
 {% block content %}
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-8 text-center py-5">
       <div class="error-container">
-        <h1 class="display-1 text-warning fw-bold">400</h1>
-        <h2 class="h3 mb-3">Bad Request</h2>
+        <h1 class="display-1 text-primary fw-bold">404</h1>
+        <h2 class="h3 mb-3">Page Not Found</h2>
         <p class="lead mb-4">
-          The request could not be understood by the server due to malformed syntax.
+          The page you're looking for doesn't exist or has been moved.
         </p>
         <div class="error-actions">
-          <a href="{{ url_for('index') }}" class="btn btn-warning me-3">
+          <a href="{{ url_for('index') }}" class="btn btn-primary me-3">
             <i class="fas fa-home me-2"></i>Go Home
+          </a>
+          <a href="{{ url_for('register') }}" class="btn btn-warning me-3">
+            <i class="fas fa-trophy me-2"></i>Join Tournament
           </a>
           <button onclick="history.back()" class="btn btn-outline-light">
             <i class="fas fa-arrow-left me-2"></i>Go Back

@@ -1,18 +1,18 @@
 {% extends "layout.html" %}
-{% block title %}400 - Bad Request{% endblock %}
+{% block title %}405 - Method Not Allowed{% endblock %}
 
 {% block content %}
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-8 text-center py-5">
       <div class="error-container">
-        <h1 class="display-1 text-warning fw-bold">400</h1>
-        <h2 class="h3 mb-3">Bad Request</h2>
+        <h1 class="display-1 text-info fw-bold">405</h1>
+        <h2 class="h3 mb-3">Method Not Allowed</h2>
         <p class="lead mb-4">
-          The request could not be understood by the server due to malformed syntax.
+          The request method is not supported for the requested resource.
         </p>
         <div class="error-actions">
-          <a href="{{ url_for('index') }}" class="btn btn-warning me-3">
+          <a href="{{ url_for('index') }}" class="btn btn-info me-3">
             <i class="fas fa-home me-2"></i>Go Home
           </a>
           <button onclick="history.back()" class="btn btn-outline-light">

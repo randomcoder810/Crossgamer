@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block title %}429 - Too Many Requests{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8 text-center py-5">
+      <div class="error-container">
+        <h1 class="display-1 text-warning fw-bold">429</h1>
+        <h2 class="h3 mb-3">Too Many Requests</h2>
+        <p class="lead mb-4">
+          You have sent too many requests in a short period. Please wait a moment and try again.
+        </p>
+        <div class="mb-3">
+          <small class="text-muted">Rate limiting is in place to ensure fair usage for all users.</small>
+        </div>
+        <div class="error-actions">
+          <button onclick="setTimeout(() => location.reload(), 5000)" class="btn btn-warning me-3">
+            <i class="fas fa-clock me-2"></i>Wait & Retry (5s)
+          </button>
+          <a href="{{ url_for('index') }}" class="btn btn-outline-light">
+            <i class="fas fa-home me-2"></i>Go Home
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.error-container {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 3rem 2rem;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+</style>
+{% endblock %}

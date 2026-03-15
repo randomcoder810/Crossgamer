@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block title %}503 - Service Unavailable{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8 text-center py-5">
+      <div class="error-container">
+        <h1 class="display-1 text-info fw-bold">503</h1>
+        <h2 class="h3 mb-3">Service Unavailable</h2>
+        <p class="lead mb-4">
+          Our servers are temporarily unavailable due to maintenance or high load. Please try again shortly.
+        </p>
+        <div class="mb-3">
+          <small class="text-muted">We're working hard to restore normal service as quickly as possible.</small>
+        </div>
+        <div class="error-actions">
+          <button onclick="setTimeout(() => location.reload(), 10000)" class="btn btn-info me-3">
+            <i class="fas fa-clock me-2"></i>Wait & Retry (10s)
+          </button>
+          <button onclick="location.reload()" class="btn btn-outline-warning me-3">
+            <i class="fas fa-redo me-2"></i>Try Now
+          </button>
+          <a href="{{ url_for('index') }}" class="btn btn-outline-light">
+            <i class="fas fa-home me-2"></i>Go Home
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.error-container {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 3rem 2rem;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+</style>
+{% endblock %}

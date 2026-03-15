@@ -1,0 +1,380 @@
+[
+  {
+    "registration_id": "REG-20251003-4092B798",
+    "team_info": {
+      "name": "Crossgamer",
+      "created_at": "2025-10-03T15:26:30.223314",
+      "status": "pending",
+      "category": "BGMI",
+      "tournament": "Esports Championship 2025"
+    },
+    "players": [
+      {
+        "id": 1,
+        "name": "45454546516",
+        "role": "Player 1",
+        "status": "active"
+      },
+      {
+        "id": 2,
+        "name": "4654616516",
+        "role": "Player 2",
+        "status": "active"
+      },
+      {
+        "id": 3,
+        "name": "6854651615615",
+        "role": "Player 3",
+        "status": "active"
+      },
+      {
+        "id": 4,
+        "name": "1654621654616",
+        "role": "Player 4",
+        "status": "active"
+      }
+    ],
+    "contact_info": {
+      "email": "randomcoder810@gmail.com",
+      "phone": "7000206028",
+      "primary_contact": "45454546516"
+    },
+    "registration_meta": {
+      "submitted_at": "2025-10-03T15:26:30.223314",
+      "ip_address": "192.168.1.4",
+      "browser": "Chrome 139.0.0.0",
+      "device": "Desktop",
+      "form_version": "2.1"
+    },
+    "validation": {
+      "email_verified": false,
+      "phone_verified": false,
+      "payment_status": "pending",
+      "documents_uploaded": false
+    }
+  },
+  {
+    "registration_id": "REG-20251003-91A4D2F7",
+    "team_info": {
+      "name": "ShadowHunters",
+      "created_at": "2025-10-03T13:45:10.992110",
+      "status": "rejected",
+      "category": "Valorant",
+      "tournament": "Esports Championship 2025"
+    },
+    "players": [
+      {
+        "id": 1,
+        "name": "PlayerX101",
+        "role": "Player 1",
+        "status": "active"
+      },
+      {
+        "id": 2,
+        "name": "NightWolf22",
+        "role": "Player 2",
+        "status": "active"
+      },
+      {
+        "id": 3,
+        "name": "GhostRider77",
+        "role": "Player 3",
+        "status": "active"
+      },
+      {
+        "id": 4,
+        "name": "DarkSoul999",
+        "role": "Player 4",
+        "status": "active"
+      }
+    ],
+    "contact_info": {
+      "email": "shadowhunters.team@gmail.com",
+      "phone": "9876543210",
+      "primary_contact": "PlayerX101"
+    },
+    "registration_meta": {
+      "submitted_at": "2025-10-03T13:45:10.992110",
+      "ip_address": "192.168.0.22",
+      "browser": "Firefox 132.0.1",
+      "device": "Desktop",
+      "form_version": "2.1"
+    },
+    "validation": {
+      "email_verified": true,
+      "phone_verified": false,
+      "payment_status": "completed",
+      "documents_uploaded": true
+    }
+  },
+  {
+    "registration_id": "REG-20251003-6B3F4C92",
+    "team_info": {
+      "name": "PixelRaiders",
+      "created_at": "2025-10-03T14:12:54.665421",
+      "status": "approved",
+      "category": "BGMI",
+      "tournament": "Esports Showdown 2025"
+    },
+    "players": [
+      {
+        "id": 1,
+        "name": "BlazeKiller",
+        "role": "Player 1",
+        "status": "active"
+      },
+      {
+        "id": 2,
+        "name": "SteelArrow",
+        "role": "Player 2",
+        "status": "inactive"
+      },
+      {
+        "id": 3,
+        "name": "VenomStrike",
+        "role": "Player 3",
+        "status": "active"
+      },
+      {
+        "id": 4,
+        "name": "EchoSniper",
+        "role": "Player 4",
+        "status": "active"
+      }
+    ],
+    "contact_info": {
+      "email": "pixelraiders.contact@gmail.com",
+      "phone": "9123456780",
+      "primary_contact": "BlazeKiller"
+    },
+    "registration_meta": {
+      "submitted_at": "2025-10-03T14:12:54.665421",
+      "ip_address": "192.168.10.54",
+      "browser": "Chrome 139.0.0.0",
+      "device": "Mobile",
+      "form_version": "2.0"
+    },
+    "validation": {
+      "email_verified": true,
+      "phone_verified": true,
+      "payment_status": "pending",
+      "documents_uploaded": false
+    }
+  },
+  {
+    "registration_id": "REG-20251003-D7E6F981",
+    "team_info": {
+      "name": "CyberTitans",
+      "created_at": "2025-10-03T15:02:19.885342",
+      "status": "pending",
+      "category": "CS:GO",
+      "tournament": "Global Esports Arena 2025"
+    },
+    "players": [
+      {
+        "id": 1,
+        "name": "AlphaZero",
+        "role": "Player 1",
+        "status": "active"
+      },
+      {
+        "id": 2,
+        "name": "BetaStorm",
+        "role": "Player 2",
+        "status": "active"
+      },
+      {
+        "id": 3,
+        "name": "GammaRay",
+        "role": "Player 3",
+        "status": "active"
+      },
+      {
+        "id": 4,
+        "name": "DeltaForce",
+        "role": "Player 4",
+        "status": "inactive"
+      }
+    ],
+    "contact_info": {
+      "email": "cybertitans.esports@gmail.com",
+      "phone": "9998887776",
+      "primary_contact": "AlphaZero"
+    },
+    "registration_meta": {
+      "submitted_at": "2025-10-03T15:02:19.885342",
+      "ip_address": "192.168.5.102",
+      "browser": "Edge 127.0.2",
+      "device": "Laptop",
+      "form_version": "2.1"
+    },
+    "validation": {
+      "email_verified": false,
+      "phone_verified": true,
+      "payment_status": "completed",
+      "documents_uploaded": true
+    }
+  },
+  {
+    "registration_id": "REG-20251017-7240AA1F",
+    "team_info": {
+      "name": "Crossgamer",
+      "created_at": "2025-10-17T22:00:51.072884",
+      "status": "pending",
+      "category": "BGMI",
+      "tournament": "Esports Championship 2025"
+    },
+    "players": [
+      {
+        "id": 1,
+        "name": "45454546516",
+        "role": "Player 1",
+        "status": "active"
+      },
+      {
+        "id": 2,
+        "name": "Govind",
+        "role": "Player 2",
+        "status": "active"
+      },
+      {
+        "id": 3,
+        "name": "dheeraj",
+        "role": "Player 3",
+        "status": "active"
+      },
+      {
+        "id": 4,
+        "name": "Amit",
+        "role": "Player 4",
+        "status": "active"
+      }
+    ],
+    "contact_info": {
+      "email": "randomcoder810@gmail.com",
+      "phone": "7000206028",
+      "primary_contact": "45454546516"
+    },
+    "registration_meta": {
+      "submitted_at": "2025-10-17T22:00:51.072884",
+      "ip_address": "192.168.1.3",
+      "browser": "Chrome 139.0.0.0",
+      "device": "Desktop",
+      "form_version": "2.1"
+    },
+    "validation": {
+      "email_verified": false,
+      "phone_verified": false,
+      "payment_status": "pending",
+      "documents_uploaded": false
+    }
+  },
+  {
+    "registration_id": "REG-20251017-B9CEF7BC",
+    "team_info": {
+      "name": "Crossgamer",
+      "created_at": "2025-10-17T22:03:41.321202",
+      "status": "pending",
+      "category": "BGMI",
+      "tournament": "Esports Championship 2025"
+    },
+    "players": [
+      {
+        "id": 1,
+        "name": "Aman",
+        "role": "Player 1",
+        "status": "active"
+      },
+      {
+        "id": 2,
+        "name": "Govind",
+        "role": "Player 2",
+        "status": "active"
+      },
+      {
+        "id": 3,
+        "name": "dheeraj",
+        "role": "Player 3",
+        "status": "active"
+      },
+      {
+        "id": 4,
+        "name": "Amit",
+        "role": "Player 4",
+        "status": "active"
+      }
+    ],
+    "contact_info": {
+      "email": "randomcoder810@gmail.com",
+      "phone": "7000206028",
+      "primary_contact": "Aman"
+    },
+    "registration_meta": {
+      "submitted_at": "2025-10-17T22:03:41.321202",
+      "ip_address": "192.168.1.3",
+      "browser": "Chrome 139.0.0.0",
+      "device": "Desktop",
+      "form_version": "2.1"
+    },
+    "validation": {
+      "email_verified": false,
+      "phone_verified": false,
+      "payment_status": "pending",
+      "documents_uploaded": false
+    }
+  },
+  {
+    "registration_id": "REG-20251017-2CAA78E1",
+    "team_info": {
+      "name": "Crossgamer",
+      "created_at": "2025-10-17T22:05:17.886820",
+      "status": "pending",
+      "category": "BGMI",
+      "tournament": "Esports Championship 2025"
+    },
+    "players": [
+      {
+        "id": 1,
+        "name": "Aman",
+        "role": "Player 1",
+        "status": "active"
+      },
+      {
+        "id": 2,
+        "name": "Govind",
+        "role": "Player 2",
+        "status": "active"
+      },
+      {
+        "id": 3,
+        "name": "dheeraj",
+        "role": "Player 3",
+        "status": "active"
+      },
+      {
+        "id": 4,
+        "name": "Amit",
+        "role": "Player 4",
+        "status": "active"
+      }
+    ],
+    "contact_info": {
+      "email": "randomcoder810@gmail.com",
+      "phone": "7000206028",
+      "primary_contact": "Aman"
+    },
+    "registration_meta": {
+      "submitted_at": "2025-10-17T22:05:17.886820",
+      "ip_address": "192.168.1.3",
+      "browser": "Chrome 139.0.0.0",
+      "device": "Desktop",
+      "form_version": "2.1"
+    },
+    "validation": {
+      "email_verified": false,
+      "phone_verified": false,
+      "payment_status": "pending",
+      "documents_uploaded": false
+    }
+  }
+]

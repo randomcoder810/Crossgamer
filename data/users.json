@@ -1,0 +1,15 @@
+[
+  {
+    "id": "USR-1",
+    "name": "Aman",
+    "email": "randomcoder810@gmail.com",
+    "password_hash": "dbda40b5aabb55a9375b6ac104307bf69eabf70366a00a8e1b68a047b3d1f38b",
+    "wallet": {
+      "balance": 0,
+      "currency": "INR",
+      "updated_at": "2025-10-17T22:05:17.886820"
+    },
+    "created_at": "2025-10-17T21:59:30.040450",
+    "status": "active"
+  }
+]
